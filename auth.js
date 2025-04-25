@@ -37,5 +37,20 @@ document.getElementById("logout").addEventListener("click", logout);
 
 window.onload = async () => {
   await configureClient();
-  await loginIfNeeded();
+
+  const isAuthenticated = await auth0Client.isAuthenticated();
+
+  if (!isAuthenticated) {
+    const query = window.location.search;
+    if (query.includes("code=") && query.includes("state=")) {
+      await auth0Client.handleRedirectCallback();
+      window.history.replaceState({}, document.title, "/");
+    } else {
+      await auth0Client.loginWithRedirect();
+      return; // <-- Esto detiene la ejecución si no está logueado
+    }
+  }
+
+  // Solo si está autenticado, continúa mostrando contenido
+  document.getElementById("app").style.display = "block";
 };
