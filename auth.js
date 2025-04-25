@@ -51,6 +51,6 @@ window.onload = async () => {
     }
   }
 
-  // Solo si está autenticado, continúa mostrando contenido
+  // ✅ Mostrar el dashboard si está autenticado
   document.getElementById("app").style.display = "block";
 };
