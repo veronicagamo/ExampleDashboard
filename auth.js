@@ -34,8 +34,8 @@ async function logout() {
 }
 
 document.getElementById("logout").addEventListener("click", logout);
-
 window.onload = async () => {
+  document.body.innerHTML = "<p style='font-size: 18px;'>⌛ Cargando autenticación...</p>";
   await configureClient();
 
   const isAuthenticated = await auth0Client.isAuthenticated();
