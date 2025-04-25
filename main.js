@@ -18,7 +18,6 @@ async function fetchDataAndRenderChart() {
   agCharts.AgChart.create(options);
 }
 
-window.onload = async () => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+window.addEventListener("DOMContentLoaded", () => {
   fetchDataAndRenderChart();
-};
+});

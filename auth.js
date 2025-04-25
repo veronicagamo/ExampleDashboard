@@ -14,17 +14,20 @@ async function configureClient() {
 async function loginIfNeeded() {
   const isAuthenticated = await auth0Client.isAuthenticated();
 
-  if (isAuthenticated) {
-    return;
+  if (!isAuthenticated) {
+    const query = window.location.search;
+    if (query.includes("code=") && query.includes("state=")) {
+      await auth0Client.handleRedirectCallback();
+      window.history.replaceState({}, document.title, "/");
+    } else {
+      document.body.innerHTML = "<p style='font-size: 18px;'>⌛ Redirigiendo al login...</p>";
+      await auth0Client.loginWithRedirect();
+      return;
+    }
   }
 
-  const query = window.location.search;
-  if (query.includes("code=") && query.includes("state=")) {
-    await auth0Client.handleRedirectCallback();
-    window.history.replaceState({}, document.title, "/");
-  } else {
-    await auth0Client.loginWithRedirect();
-  }
+  // Mostrar contenido si está autenticado
+  document.getElementById("app").style.display = "block";
 }
 
 async function logout() {
@@ -33,24 +36,12 @@ async function logout() {
   });
 }
 
-document.getElementById("logout").addEventListener("click", logout);
-window.onload = async () => {
-  document.body.innerHTML = "<p style='font-size: 18px;'>⌛ Cargando autenticación...</p>";
+document.addEventListener("DOMContentLoaded", async () => {
   await configureClient();
+  await loginIfNeeded();
 
-  const isAuthenticated = await auth0Client.isAuthenticated();
-
-  if (!isAuthenticated) {
-    const query = window.location.search;
-    if (query.includes("code=") && query.includes("state=")) {
-      await auth0Client.handleRedirectCallback();
-      window.history.replaceState({}, document.title, "/");
-    } else {
-      await auth0Client.loginWithRedirect();
-      return; // <-- Esto detiene la ejecución si no está logueado
-    }
+  const logoutBtn = document.getElementById("logout");
+  if (logoutBtn) {
+    logoutBtn.addEventListener("click", logout);
   }
-
-  // ✅ Mostrar el dashboard si está autenticado
-  document.getElementById("app").style.display = "block";
-};
+});
