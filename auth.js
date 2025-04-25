@@ -44,8 +44,7 @@ console.log("Usuario logueado:", user);
 
 // Lista blanca de emails permitidos
 const emailsAutorizados = [
-  "admin@sanofi.com",
-  "andreapradaspradas@gmail.com",
+  "vgamoparejo@gmail.com",
 ];
 
 // Verifica si el usuario está autorizado
