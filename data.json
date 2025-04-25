@@ -1,0 +1,5 @@
+[
+  { "evento": "Evento A", "valor": 30 },
+  { "evento": "Evento B", "valor": 55 },
+  { "evento": "Evento C", "valor": 42 }
+]
