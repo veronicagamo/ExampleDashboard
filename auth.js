@@ -39,6 +39,21 @@ async function logout() {
 document.addEventListener("DOMContentLoaded", async () => {
   await configureClient();
   await loginIfNeeded();
+  const user = await auth0Client.getUser();
+console.log("Usuario logueado:", user);
+
+// Lista blanca de emails permitidos
+const emailsAutorizados = [
+  "admin@sanofi.com",
+  "andreapradaspradas@gmail.com",
+];
+
+// Verifica si el usuario está autorizado
+if (!emailsAutorizados.includes(user.email)) {
+  document.body.innerHTML = "<h2>🚫 Acceso no autorizado</h2><p>Este correo no está autorizado para ver el dashboard.</p>";
+  return;
+}
+
 
   const logoutBtn = document.getElementById("logout");
   if (logoutBtn) {
