@@ -45,7 +45,7 @@ console.log("Usuario logueado:", user);
 // Lista blanca de emails permitidos
 const emailsAutorizados = [
   "vgamoparejo@gmail.com",
-  "jgamoj70@gmail.com",
+  "veronicagamo@icloud.com",
 ];
 
 // Verifica si el usuario está autorizado
