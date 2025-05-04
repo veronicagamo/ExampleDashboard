@@ -1,12 +1,42 @@
 body {
-  font-family: Arial, sans-serif;
-  padding: 20px;
   margin: 0;
+  font-family: Arial, sans-serif;
 }
 
-#logout {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  padding: 8px 16px;
+#app {
+  display: flex;
+  height: 100vh;
+}
+
+#sidebar {
+  width: 220px;
+  background: #f4f4f4;
+  padding: 20px;
+  border-right: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+#sidebar h3 {
+  margin-top: 0;
+}
+
+#sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+#sidebar li {
+  margin: 10px 0;
+  cursor: pointer;
+  color: #007bff;
+}
+
+#sidebar li:hover {
+  text-decoration: underline;
+}
+
+#main {
+  flex: 1;
+  padding: 20px;
+  box-sizing: border-box;
 }
