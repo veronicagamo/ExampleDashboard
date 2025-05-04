@@ -19,6 +19,5 @@ async function cargarEvento(nombre) {
 }
 
 window.addEventListener("DOMContentLoaded", () => {
-  cargarEvento('evento1'); // evento inicial
 });
 
